@@ -6,9 +6,9 @@ import { Container, Header, Button, Icon, Segment, } from 'semantic-ui-react';
 class App extends React.Component {
   state = {
     cards: [
-      { id: 1, question: "What is smoking?", answer: "Bad.", },
-      { id: 2, question: "What are juuls?", answer: "Bad.", },
-      { id: 3, question: "What will smoking do to you?", answer: "Kill you.", },
+      { id: 1, question: "What is 2+2?", answer: "4", },
+      { id: 2, question: "What is 4+4?", answer: "8", },
+      { id: 3, question: "What is 3+3?", answer: "6", },
     ],
     showForm: true,
     showAnswer: false, 
