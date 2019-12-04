@@ -11,6 +11,7 @@ class App extends React.Component {
       { id: 3, question: "What will smoking do to you?", answer: "Kill you.", },
     ],
     showForm: true,
+    showAnswer: false, 
   };
 
   getId = () => {
@@ -33,13 +34,16 @@ class App extends React.Component {
 
     toggleForm = () => this.setState({ showForm: !this.state.showForm, });
 
+    toggleShow = () => this.setState({ showAnswer: !this.state.showAnswer, });
+  
+
   render() {
     return (
       <Container>
       <div>
         <br />
         <Header as="h1"> React Flash Cards</Header>
-        <Cards cards={this.state.cards} remove={this.removeCard} toggle={this.toggleAnswer}/>
+        <Cards cards={this.state.cards} show={this.state.showAnswer} remove={this.removeCard} toggle={this.toggleShow}/>
         <br />
         <Header as="h3"> New Flashcard </Header>
         <Segment basic>
