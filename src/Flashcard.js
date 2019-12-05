@@ -1,23 +1,49 @@
 import React from 'react';
-import {Card, Button} from 'semantic-ui-react';
+import CardForm from "./CardForm"
+import {Card, Button, Segment} from 'semantic-ui-react';
 
-const Flashcard = ({ id, question, answer, remove, toggle, show }) => (
+class Flashcard extends React.Component {
+  state = { editing: false, showAnswer: false, };
+
+  toggleEdit = () => this.setState({ editing: !this.state.editing, });
+
+  toggleShow = () => this.setState({ showAnswer: !this.state.showAnswer, });
+
+  render() {
+    const { question, answer, remove, id} = this.props
+    return (
+      <Segment>
   <Card>
-    <Card.Content>
-      <Card.Header> {question} </Card.Header>
-      <Card.Description>
-      { show ? {answer} : null}
-      </Card.Description>
-    </Card.Content>
-
+      { 
+        this.state.editing ?
+        <CardForm {...this.props } toggleEdit={this.toggleEdit}/>
+        :
+        <>
+          <Card.Content header={question} />
+          { 
+            this.state.showAnswer ?
+          <Card.Content description={answer} />
+          : null
+          }
+        </>
+      }
      <Card.Content extra>
-        <div className='ui two buttons'>
-          <Button color="green" inverted onClick={() => toggle(id)}> Show Answer </Button>
-          
-          <Button color="red" inverted onClick={() => remove(id)}> Delete Card </Button>
+        <div className='ui three buttons'>
+          <Button color="green" inverted onClick={this.toggleShow}>
+            Show Answer
+          </Button>
+          <Button color="blue" inverted onClick={this.toggleEdit}> 
+            Edit
+          </Button>
+          <Button color="red" inverted onClick={() => remove(id)}>
+            Delete 
+          </Button>
         </div>
       </Card.Content>
   </Card>
-);
+  </Segment>
+    )
+  };
+};
 
 export default Flashcard;

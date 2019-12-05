@@ -1,3 +1,4 @@
+  
 import React from 'react';
 import Cards from "./Cards";
 import CardForm from "./CardForm";
@@ -6,12 +7,11 @@ import { Container, Header, Button, Icon, Segment, } from 'semantic-ui-react';
 class App extends React.Component {
   state = {
     cards: [
-      { id: 1, question: "What is 2+2?", answer: "4", },
-      { id: 2, question: "What is 4+4?", answer: "8", },
-      { id: 3, question: "What is 3+3?", answer: "6", },
+      { id: 1, question: "What are hamsters?", answer: "For seven year olds.", },
+      { id: 2, question: "What do I have?", answer: "A hamster.", },
+      { id: 3, question: "What am I?", answer: "A seven year old.", },
     ],
-    showForm: true,
-    showAnswer: false, 
+    showForm: false,
   };
 
   getId = () => {
@@ -24,6 +24,15 @@ class App extends React.Component {
     this.setState({ cards: [card, ...this.state.cards], });
   };
 
+  editCard = (cardData) => {
+    const cards = this.state.cards.map( card => {
+      if (card.id === cardData.id)
+        return cardData;
+        return card
+    });
+    this.setState({ cards, });
+  };
+
   removeCard = (id) => {
     const cards = this.state.cards.filter( card => {
       if (card.id !== id)
@@ -34,16 +43,14 @@ class App extends React.Component {
 
     toggleForm = () => this.setState({ showForm: !this.state.showForm, });
 
-    toggleShow = () => this.setState({ showAnswer: !this.state.showAnswer, });
-  
-
   render() {
     return (
       <Container>
       <div>
         <br />
         <Header as="h1"> React Flash Cards</Header>
-        <Cards cards={this.state.cards} show={this.state.showAnswer} remove={this.removeCard} toggle={this.toggleShow}/>
+        <br />
+        <Cards cards={this.state.cards} remove={this.removeCard} toggle={this.toggleAnswer} edit={this.editCard}/>
         <br />
         <Header as="h3"> New Flashcard </Header>
         <Segment basic>
