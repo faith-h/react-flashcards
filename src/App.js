@@ -1,68 +1,21 @@
-  
+import About from "./components/About";
+import Home from "./components/Home";
+import Navbar from "./components/Navbar";
+import NoMatch from "./components/NoMatch";
+import Oops from "./components/Oops";
 import React from 'react';
-import Cards from "./Cards";
-import CardForm from "./CardForm";
-import { Container, Header, Button, Icon, Segment, } from 'semantic-ui-react';
+import { Route, Switch } from 'react-router-dom';
 
-class App extends React.Component {
-  state = {
-    cards: [
-      { id: 1, question: "What are hamsters?", answer: "For seven year olds.", },
-      { id: 2, question: "What do I have?", answer: "A hamster.", },
-      { id: 3, question: "What am I?", answer: "A seven year old.", },
-    ],
-    showForm: false,
-  };
-
-  getId = () => {
-    return Math.floor((1+Math.random()) * 10000);
-  };
-
-
-  addCard = ({ question, answer}) => {
-    let card = {id: this.getId(), question, answer };
-    this.setState({ cards: [card, ...this.state.cards], });
-  };
-
-  editCard = (cardData) => {
-    const cards = this.state.cards.map( card => {
-      if (card.id === cardData.id)
-        return cardData;
-        return card
-    });
-    this.setState({ cards, });
-  };
-
-  removeCard = (id) => {
-    const cards = this.state.cards.filter( card => {
-      if (card.id !== id)
-        return card
-      });
-      this.setState({ cards: [...cards], });
-    };
-
-    toggleForm = () => this.setState({ showForm: !this.state.showForm, });
-
-  render() {
-    return (
-      <Container>
-      <div>
-        <br />
-        <Header as="h1"> React Flash Cards</Header>
-        <br />
-        <Cards cards={this.state.cards} remove={this.removeCard} toggle={this.toggleAnswer} edit={this.editCard}/>
-        <br />
-        <Header as="h3"> New Flashcard </Header>
-        <Segment basic>
-          <Button icon color="blue" onClick={this.toggleForm}>
-            <Icon name={this.state.showForm ? 'chevron up' : 'chevron down' } />
-          </Button>
-          {this.state.showForm ? <CardForm addCard={this.addCard} /> : null }
-        </Segment>
-      </div>
-      </Container>
-    )
-  };
-};
+const App = () => (
+  <>
+  <Navbar />
+  <Switch>
+    <Route exact path="/" component={Home} />
+    <Route exact path="/about" component={About} />
+    <Route exact path="/flashcards" component={Oops} />
+    <Route component={NoMatch} />
+  </Switch>
+  </>
+);
 
 export default App;

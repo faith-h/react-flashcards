@@ -13,7 +13,7 @@ class Flashcard extends React.Component {
     const { question, answer, remove, id} = this.props
     return (
       <Segment>
-  <Card>
+  <Card >
       { 
         this.state.editing ?
         <CardForm {...this.props } toggleEdit={this.toggleEdit}/>
@@ -29,13 +29,13 @@ class Flashcard extends React.Component {
       }
      <Card.Content extra>
         <div className='ui three buttons'>
-          <Button color="green" inverted onClick={this.toggleShow}>
+          <Button color="blue" inverted onClick={this.toggleShow}>
             Show Answer
           </Button>
-          <Button color="blue" inverted onClick={this.toggleEdit}> 
+          <Button color="violet" inverted onClick={this.toggleEdit}> 
             Edit
           </Button>
-          <Button color="red" inverted onClick={() => remove(id)}>
+          <Button color="purple" inverted onClick={() => remove(id)}>
             Delete 
           </Button>
         </div>
